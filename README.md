@@ -1,4 +1,4 @@
-# Insights Canned Demo
+# Insights Canned Demo - Find it Fix it before it breaks!
 Red Hat products can help you with managing and automating infrastructure resources. You will be able to demonstrate the power and flexibility of Red Hat management using either one or a combination of Red Hat products, such as Red Hat Satellite, Ansible Tower by Red Hat, Red Hat Insights, it is up to you to show all of them or a subset, depending your needs. Learn how to deliver demos without taking a Lab!
 
 ## Access the lab environment
@@ -23,7 +23,7 @@ Go to Services -> Catalogs
 
 ![Service catalogs](images/rhpds-navigate-to-service-catalog.png)
  
-Under **All Services** -> **Automation & Management** -> select ***Insights Canned Demo***
+Under **All Services** -> **Automation & Management** -> select ***Insights Canned Demo - FIFI Sat 6.4***
   
 ![Insights Canned Demo](images/rhpds-order-demo.png)
 
