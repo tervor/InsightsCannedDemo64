@@ -3,7 +3,7 @@
 
 #### Author: **Amaya Rosa Gil Pippino**
 
-## README.1ST
+##README.1ST
 
 The goal of this demo is to introduce you to a variety of Red Hat products that can help you with managing and automating infrastructure resources. You will be able to demonstrate the power and flexibility of Red Hat management using either one or a combination of Red Hat products, such as Red Hat Satellite, Ansible Tower by Red Hat, Red Hat Insights, it is up to you to show all of them or a subset, depending your needs.
 
@@ -14,6 +14,10 @@ The audience is for SAs willing to show Red Hat Management products with no prev
 # Step 0: Setup & Getting Started
 
 ### Logging into all the Red Hat Products
+
+Let’s log into the Red Hat Products that you will use in this lab so they are ready to use.
+
+In this lab application based self-signed SSL certs are going be used, please note that they are being used and should accepted in order to complete the lab exercises.
 
 Let’s log into the Red Hat Products that you will use in this lab so they are ready to use.
 
@@ -57,7 +61,7 @@ In this demo we will look at one day in the life of Ally, the system administrat
 
 ### Notes about Satellite Environment and Configurations
 
-Based on the structure/mobility of the demo, it’s possible to run into some issues with certain services therein. ONLY if you run into anything, you can run the following to fully restart the satellite services:
+Based on the structure/mobility of the demo, it’s possible to run into some issues with certain services therein. If you run into anything, you can run the following to fully restart the satellite services:
 
 SSH from your jumpbox as outlined in Step 0 to root@sat.example.com:
 
@@ -95,7 +99,7 @@ Once you’ve logged into Red Hat Satellite, you will see the main dashboard:
 
 Ally from her office spot has logged into the Satellite Web UI and has gone to Insights tab. Since Ally has her machines registered to Satellite, Insights is already reporting information into Satellite, as you can see in the right upper corner. From the main dashboard and just with a glance, Ally is able to see the overall health of the systems, showing here the most critical issues that need attention. This is what she does every day, and she’s able to maintain her systems healthy with no more resources.
 
-### **Background**:
+###**Background**:
 
 The following are the steps needed to get your Red Hat Insights managed hosts registered to Red Hat Satellite, you’d not need to perform any of these, but they are here just in case you need explain them to your audience.  
 
@@ -138,6 +142,8 @@ From the jumpbox machine, jump to the tower one and execute the following playbo
 > * **[root@tower playbooks]# ansible-playbook canned-demo.yml**
 
 What this does, it’s assuring machines are registered to Insights and Satellite and then, making sure there’s something to be fixed. **This step is required.**
+
+**NOTE**: If one or more of the clients machines have issues registering to Satellite, you could either re run this script or take the explained steps above on the particular machine.
 
 # Demo 2: Red Hat Insights To Solve Security Issues
 
@@ -182,7 +188,7 @@ In the particular case of the payload injection security issue, an Ansible Playb
 
 ![image alt text](images/image_7.png)
 
-Now we’d need to create a plan in which the issues that are found will be solved using an Ansible Playbook. In this demo, it is already created and stored in the tower machines, but just for demonstration purposes, we’ll do it again.  To do so, from your Satellite 6.3 UI, click on **Red Hat Insights → Planner.**
+Now we’d need to create a plan in which the issues that are found will be solved using an Ansible Playbook. In this demo, it is already created and stored in the tower machines, but just for demonstration purposes, we’ll do it again.  To do so, from your Satellite 6.4 UI, click on **Red Hat Insights → Planner.**
 
 ![image alt text](images/image_8.png)
 
@@ -204,6 +210,53 @@ Once the plan is saved, the planner screen is shown where you can see the newly 
 
 ![image alt text](images/image_12.png)
 
+As you can see, now, Satellite 6.4 gives us the opportunity to either download the playbook you've just created, run it or customize its run. This new functionality is present in Satellite 6.4+ and gives you total control of your systems from Satellite, being able to save time and possible human errors by applying the remediation playbook with a click of a mouse, all within Satellite Web interface.
+
+## Remediating from Satellite 6.4
+
+Let's dig a little deeper on the remediation within Satellite Web Interface.
+
+Ally has this set of machines with this very critical issue, and since the risk of change is moderate, she's decided to run the remediation playbook during the weekend, as those machines have workloads that are not heavily used on weekends.
+
+In order to do so, click on "Customize Playbook Run"
+
+You can see the customize screen where the execution date and time can be defined; in this case, Ally has chosen Feb 10th at 15:23 pm.
+
+![image alt text](images/image_12_1.png)
+
+Clicking on submit will create the task.
+
+**NOTE FOR PRESENTERS:** Since you can not schedule for that later in time, either use a time in the next minutes or just select "Execute now" you will be doing the same than choosing "Run Playbook" in the previous screen. Navigate between both to show your customers the different options and run the plan we created before, "payload".
+
+You will be presented with the following screen, that shows you the progress of the execution of the playbook.
+
+![image alt text](images/image_12_2.png)
+
+If you click on any of the hosts in which the remediation playbook is to be applied, you can see the progress of the playbook being executed, as well as te playbook itself.
+
+![image alt text](images/image_12_3.png)
+
+Feel free to play around with the different options.
+
+Once the remediatio has been applied, Insights is also run, so the information is consistent.
+
+Please go again to **Insights → Overview** and see how the "**Kernel vulnerable to man-in-the-middle via payload injection (CVE-2016-5696)**" is no longer affecting your systems.
+
+![image alt text](images/image_12_4.png)
+
+## Remediating manually
+
+You can also show how to manually solve these issues from the command line.
+
+**NOTE FOR PRESENTERS:** The playbook that’s generated in this demo is already downloaded into the Tower machine for your convenience. There are some that you could use:
+
+* rebreak-hosts.yml: This one is used to get all VMs to original failure state. Use this here if you want to solve again the "**Kernel vulnerable to man-in-the-middle via payload injection (CVE-2016-5696)**" issue.
+* payload-injection.yml: This playbook solves the "**Kernel vulnerable to man-in-the-middle via payload injection (CVE-2016-5696)**" issue (as we just did from Satellite 6.4 UI).
+* ssh-crit.yml: This playbook solves the "**OpenSSH vulnerable to remote password guessing attack (CVE-2015-5600)**" in all client machines.
+* payload-ssh-all.yml: This playbook solves both the "**Kernel vulnerable to man-in-the-middle via payload injection (CVE-2016-5696)**" issue and the "**OpenSSH vulnerable to remote password guessing attack (CVE-2015-5600)**" one, hence, clears all your critical issues (by the time of writing this guide, a newer cirtial issue may have been detected after that won't be solved with this playbook).
+
+In this lab, we are solving the very same "**Kernel vulnerable to man-in-the-middle via payload injection (CVE-2016-5696)**" issue as in the previous lab, if you choose to do same, and have also solved it within Satellite, plase do run "`rebreak-hosts.yml`" playbook first from the command line.
+
 If not already there, login to your client VM, first SSH into your workstation node at workstation-*GUID*.rhpds.opentlc.com as the lab-user. An ssh key is already in the home directory of your laptop, which should allow you to login without a password. Should a password be required, use "**r3dh4t1!**"  as  your password. 
 
 > * **[lab-user@localhost ~]$ ssh workstation-GUID.rhpds.opentlc.com**
@@ -213,10 +266,6 @@ If not already there, login to your client VM, first SSH into your workstation n
 Now that you are in the workstation node, SSH into the tower machine in order perform the recommended active mitigation with the Ansible Playbook. 
 
 As mentioned before, no previous Ansible knowledge is needed, this is what allows Ally to solve issues on her infrastructure rapidly and effectively, whenever her company policies allows her to do so. She simply needs to execute the automatically generated playbook from the command line.
-
-NOTE FOR PRESENTERS:
-
-The playbook that’s generated in this demo is already downloaded into the Tower machine for your convenience.
 
 **[root@workstation ~]# ssh tower**
 
@@ -247,7 +296,7 @@ After applying the active mitigation, we want to have the system report any chan
 
 Wait until this step completes before moving to the next step.
 
-From your Satellite 6.3 UI, click on **Red Hat Insights → Inventory.**
+From your Satellite 6.4 UI, click on **Red Hat Insights → Inventory.**
 
 ![image alt text](images/image_13.png)
 
@@ -268,8 +317,6 @@ If your audience is willing to spend some more time, you can go and fix all the 
 **IMPORTANT**: Please note that solving all your issues does not allow to revert to the original state, so only run this here if your audience is not interested in seeing Ansible Tower integration for automatic remediation.
 
 Again, you will show your audience how to create a plan that solves all the issues in your infrastructure, however, the playbook is already created and downloaded to the tower machine.
-
- 
 
 From the Satellite UI, click on **Red Hat Insights → Inventory** so we can focus on the whole infrastructure.
 
@@ -302,9 +349,9 @@ You should see all the issues this plan is going to solve as well as the affecte
 
 Scrolling down the screen, you should be able to download the playbook.
 
-Like in the previous step, we need to log into the tower machine in order to run the Ansible Playbook.
+Like in the previous step, we need to log into the tower machine in order to run the Ansible Playbook or simply apply it from the Satellite 6.4 UI. I will explain the first option, as the second one is simply clicking on "Run Playbook" button.
 
-If not already there, login to your client VM, first SSH into your workstation node at workstation-*GUID*.rhpds.opentlc.com as the lab-user. An ssh key is already in the home directory of your laptop, which should allow you to login without a password. Should a password be required, use "**r3dh4t1!**"  as  your password. 
+If not already there, login to your client VM, first SSH into your workstation node at workstation-*GUID*.rhpds.opentlc.com as the lab-user. An ssh key is already in the home directory of your laptop, which should allow you to login without a password. Should a password be required, use "**r3dh4t1!**" as your password. 
 
 > * **[lab-user@localhost ~]$ ssh workstation-GUID.rhpds.opentlc.com**
 > * **[lab-user@workstation-GUID ~]$ sudo -i**
@@ -491,4 +538,3 @@ Now you can demonstrate different scenarios depending on the time you have. If y
 * rebreak-hosts.yml:  This playbook tries to break the machines again, please not it’s not possible to go back to the original state once fix-all.yml playbook is executed.
 
 You can play around selecting one or the other playbook and then going back to satellite UI or from Tower as previously seen, to see the different state your machines go thru. If you want, after applying a solution, you can run the rebreak-hosts.yml playbook to revert those fixes.
-
