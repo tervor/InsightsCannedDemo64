@@ -1,4 +1,4 @@
-# Red Hat Partner Demo System 2018
+# Red Hat Partner Demo System 2019
 ## Scripted Demo on Red Hat Management Suite
 
 #### Author: **Amaya Rosa Gil Pippino**
