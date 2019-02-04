@@ -23,7 +23,7 @@ Go to Services -> Catalogs
 
 ![Service catalogs](images/rhpds-navigate-to-service-catalog.png)
  
-Under **All Services** -> **Automation & Management** -> select ***Insights Canned Demo - FIFI Sat 6.4***
+Under **All Services** -> **Automation & Management** -> select ***Insights Integration w/ Sat 6.4 & Tower***
   
 ![Insights Canned Demo](images/rhpds-order-demo.png)
 
