@@ -35,4 +35,4 @@ Please, read carefully all of the information on the resulting page, check the b
 
 ✔️ NOTE Be mindful of the runtime of your demo environment! It may take several hours to complete the demo, so you may need to extend the runtime. This is especially important in later steps when you are building virtual machines. For information on how to extend runtime and lifetime, see https://www.opentlc.com/lifecycle.
 
-You can find the full demo guide [here](https://github.com/amayagil/InsightsCannedDemo/blob/master/Guide.md)
+You can find the full demo guide [here](https://github.com/amayagil/InsightsCannedDemo64/blob/master/Guide.md)
