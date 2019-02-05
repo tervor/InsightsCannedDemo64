@@ -2,6 +2,8 @@
 ## Scripted Demo on Red Hat Management Suite
 
 #### Author: **Amaya Rosa Gil Pippino**
+#### Senior Solutions Architect
+#### EMEA Office of Technology
 
 ##README.1ST
 
