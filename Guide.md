@@ -45,7 +45,7 @@ This is an example of use case.  Who you're presenting to will obviously vary ba
 
 Today we are wearing Allison’s shoes.
 
-Ally is a system administrator for Example company. She is tasked with managing different infrastructures than run the different company services.
+Ally is a system administrator for Example company. She is tasked with managing different infrastructures that run the different company services.
 
 Ally is in distress because she’s the only Linux system administrator at Example (here you can fit the story to what fits best for your customer, it may be an small company or she’s alone because everyone else is gone on vacation) and she needs to do all the daily administrative tasks (rolling out new services, creating new user accounts, provide them with quotas, etc) while she needs to make sure all the current services are up and running, and hence the underlying Linux infrastructure is running healthy as well.
 
@@ -57,7 +57,7 @@ While this is being demo'd as if it's already installed and configured, it's act
 
 Then, Ally logs either on the external Red Hat Customer Portal or into her internal Satellite Web Interface to interact with Insights and there she can see the actual health of he infrastructure.
 
-She is also able to create remediation plans with the simple use of a mouse click and define what systems she wants to fix and the different issues he wants to address, based on her company policies. Sometimes Ally applies the fixes as soon as she sees them on Insights and some other times, she waits to have a maintenance window. These plans are created on the fly by Insights in the form of an Ansible Playbook, and Ally simply has to apply them.
+She is also able to create remediation plans with the simple use of a mouse click and define what systems she wants to fix and the different issues she wants to address, based on her company policies. Sometimes Ally applies the fixes as soon as she sees them on Insights and some other times, she waits to have a maintenance window. These plans are created on the fly by Insights in the form of an Ansible Playbook, and Ally simply has to apply them.
 
 In this demo we will look at one day in the life of Ally, the system administrator.
 
@@ -91,7 +91,7 @@ Click "Advanced" to open the advanced menu, and then “Proceed to ….” or �
 
 ![image alt text](images/image_2.png)
 
-The warning is due to a self signed certificate authority potentially not being available on your local workstation and if you’re using the Chrome browser.
+The warning is due to a self signed certificate authority not being available on your local workstation. Different steps apply if you’re using other browsers.
 
 Now that we’ve navigated to the login, login as user "**admin**" with the password “**r3dh4t1!**” as mentioned previously in this guide.
 
@@ -122,7 +122,7 @@ Run the bootstrap.py script using the Satellite manifest that uses certificate b
 
 In addition, manual installation and registration of the Insights client is possible by performing the following:
 
-NOTE: On RHEL 7.5 client RPM has been renamed to insights-client, but this demo machines are using RHEL 7.0 and 7.3 for demonstration purposes, so the package name is still the old one.
+NOTE: On RHEL 7.5 the client RPM has been renamed to insights-client, but this demo machines are using RHEL 7.0 and 7.3 for demonstration purposes, so the package name is still the old one.
 
 To install Insights RPM in each of your systems issue the following command:
 
@@ -132,7 +132,7 @@ And then, simply register each machine with Red Hat Insights as follows:
 
 > **[root@icX ~]# insights-client --register**
 
-**NOTE**: Due to the configuration of the account used for this demo (it’s shared amongst the different instances) do you need to do this next step (my recommendation is that you perform it while explaining the persona overview, it takes around 5 mins to complete). It’s a playbook that basically does all what’s explained above.
+**NOTE**: Due to the configuration of the account used for this demo (it’s shared amongst the different instances) you need to do this next step (my recommendation is that you perform it while explaining the persona overview, it takes around 5 mins to complete). It’s a playbook that basically does all what’s explained above.
 
 **REQUIRED STEP!!!!**
 
